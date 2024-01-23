@@ -44,7 +44,10 @@ public class Trip {
                 Location smallerLocation = pendingLocations.get(smaller);
                 if(canAddLocationWithCurrentDrone(smallerLocation)){
                     addLocation(smallerLocation);
-                }   
+                // If couldnt add the smallest available location, we can now exit this trip generation
+                } else {
+                    break;
+                }
             }
         }
         if(locations.isEmpty()) {
