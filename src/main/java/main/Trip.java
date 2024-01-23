@@ -29,15 +29,18 @@ public class Trip {
     */
     public Trip(List<Location> pendingLocations, List<Drone> drones) {
         drone = drones.get(0);
+        // Run hrough the locations from outside out
         for(int larger = 0, smaller = pendingLocations.size() - 1; 
                 larger <= smaller; 
                 larger++, smaller--) {
-            
+            // Inserts the largest pending location if it is supported by the drone
             Location largerLocation = pendingLocations.get(larger);
             if(canAddLocationWithCurrentDrone(largerLocation)){
                 addLocation(largerLocation);
             }
+            // If the smaller current location is different than the one just inserted 
             if(smaller != larger) {
+                // Insert the smallest pending location if its suported by the current drone
                 Location smallerLocation = pendingLocations.get(smaller);
                 if(canAddLocationWithCurrentDrone(smallerLocation)){
                     addLocation(smallerLocation);
@@ -47,9 +50,10 @@ public class Trip {
         if(locations.isEmpty()) {
             throw new RuntimeException("Couldn`t find any viable trip for the remaining locations: "+ pendingLocations);
         }
+        // After finished, check if heres some smaller drone that can take this trip
         useNextLargestDroneThatSupportsCurrentWeight(drones);
         pendingLocations.removeAll(locations);
-        drone.addTript(this);
+        drone.addTrip(this);
     }
     
     private void addLocation(Location location){
@@ -62,6 +66,7 @@ public class Trip {
     }
     
     private void useNextLargestDroneThatSupportsCurrentWeight(List<Drone> dronesList) {
+        // Changes the drone of this trip to smallest one that will support the total weight
         for(int i = dronesList.size() - 1; i >= 0; i--) {
             Drone currentDrone = dronesList.get(i);
             if(currentDrone.getMaximumWeight() >= totalWeight) {
@@ -73,6 +78,10 @@ public class Trip {
 
     public List<Location> getLocations() {
         return locations;
+    }
+
+    public int getTotalWeight() {
+        return totalWeight;
     }
 
     @Override

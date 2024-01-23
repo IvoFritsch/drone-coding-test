@@ -1,18 +1,18 @@
-[DroneB]
-Trip #0
-[LocationA], [LocationO], [LocationL]
-Trip #1
-[LocationF], [LocationN]
-Trip #2
-[LocationB], [LocationK], [LocationM]
-Trip #3
-[LocationD], [LocationJ], [LocationG]
-Trip #4
-[LocationE], [LocationC], [LocationP]
-
 [DroneA]
-Trip #0
+Trip #1
 [LocationH], [LocationI]
+
+[DroneB]
+Trip #1
+[LocationA], [LocationO], [LocationL]
+Trip #2
+[LocationF], [LocationN]
+Trip #3
+[LocationB], [LocationK], [LocationM]
+Trip #4
+[LocationD], [LocationJ], [LocationG]
+Trip #5
+[LocationE], [LocationC], [LocationP]
 
 [DroneC]
 

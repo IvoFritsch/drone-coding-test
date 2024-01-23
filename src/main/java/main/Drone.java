@@ -16,11 +16,13 @@ import java.util.List;
 public class Drone {
     private final String name;
     private final int maximumWeight;
+    private final int originalIndex;
     private final List<Trip> trips = new ArrayList<>();
     
-    public Drone(ValueBetweenBrackets name, ValueBetweenBrackets maximumWeight) {
+    public Drone(ValueBetweenBrackets name, ValueBetweenBrackets maximumWeight, int index) {
         this.name = name.getStringValue();
         this.maximumWeight = maximumWeight.getIntValue();
+        this.originalIndex = index;
     }
 
     public int getMaximumWeight() {
@@ -31,12 +33,16 @@ public class Drone {
         return name;
     }
     
-    public void addTript(Trip trip) {
+    public void addTrip(Trip trip) {
         trips.add(trip);
     }
 
     public List<Trip> getTrips() {
         return Collections.unmodifiableList(trips);
+    }
+
+    public int getOriginalIndex() {
+        return originalIndex;
     }
 
     @Override

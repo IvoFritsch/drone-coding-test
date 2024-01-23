@@ -41,7 +41,7 @@ public class Main {
             // Goes through the first line and add each drone to a list
             List<ValueBetweenBrackets> firstLine = parsedFile.get(0);
             for(int i = 1; i < firstLine.size(); i = i+2) {
-                availableDrones.add(new Drone(firstLine.get(i - 1), firstLine.get(i)));
+                availableDrones.add(new Drone(firstLine.get(i - 1), firstLine.get(i), i - 1));
             }
             // Sorts the drones from the largest to the smallest
             availableDrones.sort((droneA, droneB) -> droneB.getMaximumWeight() - droneA.getMaximumWeight());
@@ -60,6 +60,8 @@ public class Main {
             }
             // Construct the output text
             StringBuilder output = new StringBuilder();
+            // Resort the drones in the original order again
+            availableDrones.sort((droneA, droneB) -> droneA.getOriginalIndex() - droneB.getOriginalIndex());
             availableDrones.forEach(d -> {
                 output.append("[");
                 output.append(d.getName());
@@ -67,7 +69,7 @@ public class Main {
                 List<Trip> droneTrips = d.getTrips();
                 for (int i = 0; i < droneTrips.size(); i++) {
                     output.append("Trip #");
-                    output.append(i);
+                    output.append(i + 1);
                     output.append("\n");
                     output.append(droneTrips.get(i).getLocations().stream().map(Location::toString).collect(Collectors.joining(", ")));
                     output.append("\n");
